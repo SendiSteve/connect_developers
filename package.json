@@ -1,0 +1,38 @@
+{
+  "name": "connect_developers",
+  "version": "1.0.0",
+  "description": "A social nework web application that connects developers",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SendiSteve/connect_developers.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Express",
+    "React",
+    "Redux",
+    "API",
+    "Social",
+    "Network"
+  ],
+  "author": "Stephen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SendiSteve/connect_developers/issues"
+  },
+  "homepage": "https://github.com/SendiSteve/connect_developers#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.3",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.10.0"
+  }
+}
