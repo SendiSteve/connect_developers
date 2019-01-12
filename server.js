@@ -1,16 +1,31 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
+// load routes
+const users = require('./routes/api/user');
 
 const app = express();
 
+// Middleware
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+app.use(bodyParser.json());
+
 // config db
 const db = require('./config/keys').mongoURL;
- 
+
 // connect to db
-mongoose.connect(db, { useNewUrlParser: true })
+mongoose.connect(db, {
+        useNewUrlParser: true
+    })
     .then(() => console.log('connection successful'))
-.catch(err => console.log(err))
-    
+    .catch(err => console.log(err))
+
+// Use routes
+app.use('/api/users', users);
+
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
     console.log(`Listening to port ${port}`)
