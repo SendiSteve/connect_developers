@@ -16,7 +16,7 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    avator: {
+    avatar: {
         type: String,
         required: true
     },
@@ -26,4 +26,4 @@ const UserSchema = new Schema({
     }
 });
 
-mongoose.model('users', UserSchema);
+module.exports = User = mongoose.model('users', UserSchema);
