@@ -8,6 +8,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
 
 const keys = require('../../config/keys');
+const passport = require('../../config/passport');
+
 /* 
     @route GET/api/users/register
     @desc: Register user to the api
@@ -40,7 +42,9 @@ router.post('/register', (req, res) => {
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) throw err;
+                    // set new user password to the hash
                     newUser.password = hash;
+                    // save the user to the db
                     newUser
                         .save()
                         .then(user => res.json(user))
@@ -92,7 +96,7 @@ router.post('/login', (req, res) => {
                             })
                         })
                     } else {
-                        res.status(404).json({
+                        res.status(400).json({
                             password: "Incorrect password"
                         })
                     }
