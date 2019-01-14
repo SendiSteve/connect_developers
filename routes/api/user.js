@@ -10,12 +10,25 @@ const User = require('../../models/User');
 const keys = require('../../config/keys');
 const passport = require('../../config/passport');
 
+// load validation module
+const validateRegisterInput = require('../../validation/register');
+
 /* 
     @route GET/api/users/register
     @desc: Register user to the api
     @access: public
 */
 router.post('/register', (req, res) => {
+    // validate user input
+    const {
+        errors,
+        isValid
+    } = validateRegisterInput(req.body);
+
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+
     // check if user exists using email as a unique key
     User.findOne({
         email: req.body.email
