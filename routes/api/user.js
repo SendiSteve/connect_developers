@@ -12,6 +12,7 @@ const passport = require('../../config/passport');
 
 // load validation module
 const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 
 /* 
     @route GET/api/users/register
@@ -75,6 +76,16 @@ router.post('/register', (req, res) => {
 */
 
 router.post('/login', (req, res) => {
+    // validate user input
+    const {
+        errors,
+        isValid
+    } = validateLoginInput(req.body);
+
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+
     // get user email and password
     const email = req.body.email;
     const password = req.body.password;
@@ -85,9 +96,8 @@ router.post('/login', (req, res) => {
         })
         .then(user => {
             if (!user) {
-                return res.status(404).json({
-                    email: "User not found"
-                });
+                errors.email = 'User not found'
+                return res.status(404).json(errors);
             }
             // if user exists- match the password with the hash
             bcrypt.compare(password, user.password)
@@ -109,9 +119,8 @@ router.post('/login', (req, res) => {
                             })
                         })
                     } else {
-                        res.status(400).json({
-                            password: "Incorrect password"
-                        })
+                        errors.password = 'Incorrect password'
+                        res.status(400).json(errors)
                     }
                 })
         })
