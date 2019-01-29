@@ -38,12 +38,32 @@ router.get('/', passport.authenticate('jwt', {
 });
 
 /*
+    @route GET api/profile/handle/:handle
+    @ desc get user profile by handle
+    @access public
+*/
+router.get('/handle/:handle', (req, res) => {
+    const errors = {}
+    Profile.findOne({
+            handle: req.params.handle
+        })
+        .populate('user', ['username', 'avatar'])
+        .then(profile => {
+            if (!profile) {
+                errors.noprofile = 'There is no profilef for this user';
+                res.status(404).json(errors)
+            }
+            res.json(profile);
+        })
+        .catch(err => res.status(404).json(err));
+});
+
+
+/*
     @route POST api/profile
     @ desc create user profile
     @access private
 */
-
-
 router.post(
     '/',
     passport.authenticate('jwt', {
