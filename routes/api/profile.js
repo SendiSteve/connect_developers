@@ -189,7 +189,7 @@ router.post('/experience', passport.authenticate('jwt', {
     session: false
 }), (req, res) => {
     Profile.findOne({
-            user: req.useri.d
+            user: req.user.id
         })
         .then(profile => {
             const newExp = {
@@ -202,7 +202,7 @@ router.post('/experience', passport.authenticate('jwt', {
                 description: req.body.description
             }
             // Add to exp array
-            profile.experience.unshiftn(newExp);
+            profile.experience.unshift(newExp);
             profile.save()
                 .then(profile => res.json(profile));
         })
