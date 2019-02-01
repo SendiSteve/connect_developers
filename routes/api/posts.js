@@ -37,4 +37,22 @@ router.post('/', passport.authenticate('jwt', {
         .then(post => res.json(post))
         .catch(err => res.status(400).json(err));
 });
+
+// @route GET api/posts
+// @desc Get post
+// @access Private
+
+router.get('/', (req, res) => {
+    Post.find()
+        .sort({
+            date: -1
+        })
+        .then(post => {
+            if (post) {
+                res.json(post);
+            }
+        })
+        .catch(err => res.status(404).json(err));
+});
+
 module.exports = router;
