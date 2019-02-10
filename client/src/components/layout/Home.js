@@ -14,7 +14,7 @@ class Home extends Component {
                 </p>
                 <hr />
                 <a href="/register" className="btn btn-lg btn-danger mr-2">
-                  Sign Up
+                  Register
                 </a>
                 <a href="/login" className="btn btn-lg btn-light">
                   Login
