@@ -1,6 +1,31 @@
 import React, {Component} from 'react'
 
 class Register extends Component{
+    constructor () {
+        super();
+        this.state = {
+            username: '',
+            email: '',
+            password: '',
+            password2: '',
+            errors: {}
+        };
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+    onChange (e) {
+        this.setState({[e.target.name]: e.target.value});
+    }
+    onSubmit(e){
+        e.preventDefault();
+        const newUser = {
+            username: this.state.username,
+            email:this.state.email,
+            password:this.state.password,
+            password2:this.state.password2
+        }
+        console.log(newUser);
+    }
     render() {
         return (
             <div>
@@ -12,23 +37,23 @@ class Register extends Component{
                                 <p className="lead text-center">
                                     Create your connect developer account
                                 </p>
-                                <form>
+                                <form onSubmit={this.onSubmit}>
                                     <div className="form-group">
-                                        <input type="text" className="form-control" placeholder="Username" name="username" required />
+                                        <input type="text" className="form-control" placeholder="Username" name="username" value={this.state.username} onChange={this.onChange} />
                                     </div>
                                     <small className="form-text text-muted">
                                         This site uses Gravatar so if you want a profile image, use
                                         a Gravatar email
                                     </small>
                                     <div className="form-group">
-                                        <input type="email" className="form-control" placeholder="example@example.com" name="email" required />
+                                        <input type="email" className="form-control" placeholder="example@example.com" name="email" value={this.state.email} onChange={this.onChange} />
                                     </div>
                                     
                                     <div className="form-group">
-                                        <input type="password" className="form-control" placeholder="Password" name="password" required />
+                                        <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.password} onChange={this.onChange} />
                                     </div>
                                     <div className="form-group">
-                                        <input type="password" className="form-control" placeholder="Confirm Password" name="password2" required />
+                                        <input type="password" className="form-control" placeholder="Confirm Password" name="password2" value={this.state.password2} onChange={this.onChange} />
                                     </div>
                                     <input type="submit" className="btn btn-danger btn-block mt-4" />
 
