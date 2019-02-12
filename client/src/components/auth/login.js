@@ -22,6 +22,7 @@ class Register extends Component{
         }
         console.log(user);
     }
+
     render() {
         return (
             <div className="login">

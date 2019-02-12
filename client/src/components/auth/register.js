@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import axios from 'axios'
+import classnames from 'classnames';
 
 class Register extends Component{
     constructor () {
@@ -24,9 +26,14 @@ class Register extends Component{
             password:this.state.password,
             password2:this.state.password2
         }
-        console.log(newUser);
+        // console.log(newUser);
+        axios.post('/api/users/register', newUser)
+        .then(response => console.log(response.data))
+        .catch(err => this.setState({errors: err.response.data}))
     }
     render() {
+        const { errors } = this.state;
+
         return (
             <div>
                 <div className="register">
@@ -39,21 +46,25 @@ class Register extends Component{
                                 </p>
                                 <form onSubmit={this.onSubmit}>
                                     <div className="form-group">
-                                        <input type="text" className="form-control" placeholder="Username" name="username" value={this.state.username} onChange={this.onChange} />
+                                        <input type="text" className={classnames('form-control', {'is-invalid': errors.username})} placeholder="Username" name="username" value={this.state.username} onChange={this.onChange} />
+                                        {errors.username && (<div className="invalid-feedback">{errors.username}</div>)}
                                     </div>
                                     <small className="form-text text-muted">
                                         This site uses Gravatar so if you want a profile image, use
                                         a Gravatar email
                                     </small>
                                     <div className="form-group">
-                                        <input type="email" className="form-control" placeholder="example@example.com" name="email" value={this.state.email} onChange={this.onChange} />
+                                        <input type="email" className={classnames('form-control', {'is-invalid':errors.email})} placeholder="example@example.com" name="email" value={this.state.email} onChange={this.onChange} />
+                                        {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
                                     </div>
                                     
                                     <div className="form-group">
-                                        <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.password} onChange={this.onChange} />
+                                        <input type="password" className={classnames('form-control', {'is-invalid':errors.password})} placeholder="Password" name="password" value={this.state.password} onChange={this.onChange} />
+                                        {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
                                     </div>
                                     <div className="form-group">
-                                        <input type="password" className="form-control" placeholder="Confirm Password" name="password2" value={this.state.password2} onChange={this.onChange} />
+                                        <input type="password" className={classnames('form-control', {'is-invalid': errors.password})} placeholder="Confirm Password" name="password2" value={this.state.password2} onChange={this.onChange} />
+                                        {errors.password2 && (<div className="invalid-feedback">{errors.password2}</div>)}
                                     </div>
                                     <input type="submit" className="btn btn-danger btn-block mt-4" />
 
