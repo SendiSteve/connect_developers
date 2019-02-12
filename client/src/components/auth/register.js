@@ -44,7 +44,7 @@ class Register extends Component{
                                 <p className="lead text-center">
                                     Create your connect developer account
                                 </p>
-                                <form onSubmit={this.onSubmit}>
+                                <form noValidate onSubmit={this.onSubmit}>
                                     <div className="form-group">
                                         <input type="text" className={classnames('form-control', {'is-invalid': errors.username})} placeholder="Username" name="username" value={this.state.username} onChange={this.onChange} />
                                         {errors.username && (<div className="invalid-feedback">{errors.username}</div>)}
