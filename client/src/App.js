@@ -4,8 +4,8 @@ import {Provider} from 'react-redux';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './components/layout/Home';
-import Register from './components/auth/register';
-import Login from './components/auth/login';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
 import './App.css';
 import store from './store';
