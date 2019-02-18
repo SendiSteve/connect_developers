@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
-import registerUser from '../../actions/authActions'
+import {registerUser} from '../../actions/authActions'
 
 class Register extends Component{
     constructor () {
@@ -84,7 +84,7 @@ Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
-}
+  };
 const mapStateToProps = state => ({
     auth: state.auth,
     errors: state.errors

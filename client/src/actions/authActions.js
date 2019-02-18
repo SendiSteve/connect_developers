@@ -3,7 +3,8 @@ import { GET_ERRORS } from './types'
 
 
 // Register user
-const registerUser = (userData, history)=>  dispatch =>{
+export const registerUser = (userData, history) => dispatch => {
+
     axios
         .post('/api/users/register', userData)
         .then(res => history.push('/login'))
@@ -14,4 +15,3 @@ const registerUser = (userData, history)=>  dispatch =>{
             })
             )
 }
-export default registerUser
